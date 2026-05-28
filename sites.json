@@ -1,0 +1,19 @@
+[
+  {
+    "id": "745be5b2-7508-4ed4-ae23-7b3441f14995",
+    "url": "https://alshaabalwaseem.com/",
+    "user": "REPLACE_WITH_WORDPRESS_USERNAME",
+    "pass": "REPLACE_WITH_WORDPRESS_PASSWORD",
+    "name": "alshaabalwaseem.com",
+    "gscCredentials": "REPLACE_WITH_GOOGLE_SERVICE_ACCOUNT_JSON",
+    "gscPropertyUrl": "https://alshaabalwaseem.com/"
+  },
+  {
+    "id": "e09dd8a9-a35f-4648-8596-fff1339cc341",
+    "url": "https://aitoolsgent.com",
+    "user": "REPLACE_WITH_WORDPRESS_USERNAME",
+    "pass": "REPLACE_WITH_WORDPRESS_PASSWORD",
+    "name": "aitoolsgent.com",
+    "gscPropertyUrl": "https://aitoolsgent.com"
+  }
+]
