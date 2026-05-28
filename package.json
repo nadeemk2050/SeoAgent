@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "kill-port 3000 24678",
-    "dev": "tsx server.ts",
+    "predev": "npx kill-port 3003 24678 || echo Already Clean",
+    "dev": "tsx watch server.ts",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
@@ -14,14 +14,17 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
+    "@types/sharp": "^0.31.1",
     "@vitejs/plugin-react": "^5.0.4",
     "cheerio": "^1.2.0",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
+    "googleapis": "^171.4.0",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
+    "sharp": "^0.34.5",
     "vite": "^6.2.3"
   },
   "devDependencies": {

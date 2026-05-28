@@ -6,3 +6,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Local site config / credentials (DO NOT COMMIT)
+sites.json
+dominonad-d18c24fb4b4f.json
