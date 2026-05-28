@@ -182,7 +182,8 @@ add_action('init', function() {
         });
         console.log("SEO Snippet injected!");
 
-        // Trigger init to run the meta injection
+        // Trigger a page load so WordPress fires the 'init' hook and executes the
+        // Rank Math meta injection on the first natural request after snippet activation.
         await fetch(site.url);
 
         // Purge Cache
