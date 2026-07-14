@@ -14,8 +14,8 @@ async function fixSite() {
     
     // The target sidebar replacements
     const oldSidebar1 = `<a href="mailto:nadeemalsaham@gmail.com" title="Email Us">✉ Email</a>`;
-    const oldSidebar2 = `<a href="tel:00971554779240" title="Call Us">📞 Call</a>`;
-    const oldSidebar3 = `<a href="https://wa.me/971529244592" target="_blank" title="WhatsApp" rel="noopener">💬 WhatsApp</a>`;
+    const oldSidebar2 = `<a href="tel:971554779240" title="Call Us">📞 Call</a>`;
+    const oldSidebar3 = `<a href="https://wa.me/971554779331" target="_blank" title="WhatsApp" rel="noopener">💬 WhatsApp</a>`;
     
     for (const p of pages) {
       let content = p.content.rendered;

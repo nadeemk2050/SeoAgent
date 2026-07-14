@@ -96,7 +96,7 @@ const htmlContent = `
     <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
     <div class="wp-block-buttons">
         <!-- wp:button -->
-        <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://wa.me/971529244592" target="_blank" rel="noopener">Contact Us on WhatsApp Now</a></div>
+        <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://wa.me/971554779331" target="_blank" rel="noopener">Contact Us on WhatsApp Now</a></div>
         <!-- /wp:button -->
     </div>
     <!-- /wp:buttons -->

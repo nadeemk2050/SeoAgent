@@ -67,8 +67,8 @@ async function run() {
       
       <div>
         <h3 style="font-size: 1.25rem; font-weight: 700; color: #333333; margin-bottom: 10px;">Call Us & WhatsApp:</h3>
-        <a href="tel:00971554779240" style="display: block; font-size: 1.3rem; font-weight: 800; color: #0d954d; text-decoration: none; margin-bottom: 5px;">00971 55 477 9240</a>
-        <a href="https://wa.me/971529244592" style="display: block; font-size: 1.3rem; font-weight: 800; color: #0d954d; text-decoration: none;">+971 52 924 4592</a>
+        <a href="tel:971554779240" style="display: block; font-size: 1.3rem; font-weight: 800; color: #0d954d; text-decoration: none; margin-bottom: 5px;">+971 55 477 9240</a>
+        <a href="https://wa.me/971554779331" style="display: block; font-size: 1.3rem; font-weight: 800; color: #0d954d; text-decoration: none;">+971 55 477 9331</a>
       </div>
       
       <div>

@@ -11,13 +11,13 @@ fetch(site.url + 'wp-json/wp/v2/pages/7', {
   // 1. Replace the sticky sidebar HTML
   const oldSidebar = `<div class="custom-sticky-sidebar">
   <a href="mailto:nadeemalsaham@gmail.com" title="Email Us">✉ Email</a>
-  <a href="tel:00971554779240" title="Call Us">📞 Call</a>
-  <a href="https://wa.me/971529244592" target="_blank" title="WhatsApp" rel="noopener">💬 WhatsApp</a>
+  <a href="tel:971554779240" title="Call Us">📞 Call</a>
+  <a href="https://wa.me/971554779331" target="_blank" title="WhatsApp" rel="noopener">💬 WhatsApp</a>
 </div>`;
   const newSidebar = `<div class="custom-sticky-sidebar">
   <a href="mailto:nadeemalsaham@gmail.com" title="Email Us">✉️</a>
-  <a href="tel:00971554779240" title="Call Us">📞</a>
-  <a href="https://wa.me/971529244592" target="_blank" title="WhatsApp" rel="noopener">💬</a>
+  <a href="tel:971554779240" title="Call Us">📞</a>
+  <a href="https://wa.me/971554779331" target="_blank" title="WhatsApp" rel="noopener">💬</a>
 </div>`;
   content = content.replace(oldSidebar, newSidebar);
   
