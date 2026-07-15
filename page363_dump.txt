@@ -1,0 +1,297 @@
+<style>/* Mobile responsive */@media(max-width:600px){[style*="padding:10px 15px;border-radius:8px"]{overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;padding:8px!important;position:relative!important}[style*="padding:10px 15px;border-radius:8px"]>[style*="flex:1;min-width:0"]{flex:0 0 auto!important;width:100%!important;padding:4px 0 0!important;margin:0!important}[style*="padding:10px 15px;border-radius:8px"]>[style*="flex:1;min-width:0"]>:first-child{font-weight:600!important;font-size:0.85rem!important;color:#333!important}[style*="padding:10px 15px;border-radius:8px"]>[style*="flex:1;min-width:0"]>:nth-child(2){font-size:0.7rem!important;color:#888!important}[style*="padding:10px 15px;border-radius:8px"]>[style*="flex:1;min-width:0"]>:last-child{font-size:0.65rem!important;color:#bbb!important}[style*="padding:10px 15px;border-radius:8px"]>[style*="display:flex;gap:4px;flex-shrink:0"]{position:absolute!important;top:5px!important;right:5px!important}[style*="padding:10px 15px;border-radius:8px"]>img{flex-shrink:0!important}}/* Beautify button */.btn-beautify{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.85rem;margin-bottom:8px}.btn-beautify:hover{opacity:0.9}/* Single post page styling */.single-post .entry-content{max-width:800px;margin:0 auto;padding:20px;font-family:"Inter","Segoe UI",sans-serif;line-height:1.8;color:#333}.single-post .entry-content h2{font-size:1.3rem;font-weight:700;color:#1a1a1a;margin-top:30px;margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid #0d954d}.single-post .entry-content h3{font-size:1.1rem;font-weight:700;color:#333;margin-top:20px;margin-bottom:8px}.single-post .entry-content p{font-size:1rem;color:#444;margin-bottom:12px}.single-post .entry-content strong{color:#1a1a1a}.single-post .entry-content img{border-radius:8px;margin:15px 0;max-width:100%;height:auto}.single-post .entry-content ul,.single-post .entry-content ol{padding-left:20px;margin-bottom:15px}.single-post .entry-content li{margin-bottom:5px;color:#444}.single-post .entry-header{text-align:center;padding:30px 20px 10px}.single-post .entry-header h1{font-size:2rem;font-weight:800;color:#1a1a1a}.single-post .entry-header .meta{color:#999;font-size:0.85rem}@media(max-width:600px){.single-post .entry-content{padding:12px}.single-post .entry-content h1{font-size:1.4rem}.single-post .entry-content h2{font-size:1.1rem}.single-post .entry-header h1{font-size:1.5rem}}
+    /* Product listing excerpt - 4 lines with Read More */
+    .pm-desc-clamp {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .pm-read-more {
+      color: #0d954d;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    .pm-read-more:hover {
+      text-decoration: underline;
+    }
+    /* Single post page beautification */
+    .single-post .entry-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: "Inter", "Segoe UI", sans-serif;
+      line-height: 1.8;
+      color: #333;
+    }
+    .single-post .entry-content h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #0d954d;
+    }
+    .single-post .entry-content h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+    .single-post .entry-content p {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+    .single-post .entry-content strong {
+      color: #1a1a1a;
+    }
+    .single-post .entry-content img {
+      border-radius: 8px;
+      margin: 15px 0;
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .single-post .entry-content ul,
+    .single-post .entry-content ol {
+      padding-left: 20px;
+      margin-bottom: 15px;
+    }
+    .single-post .entry-content li {
+      margin-bottom: 5px;
+      color: #444;
+    }
+    .single-post .entry-header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+    .single-post .entry-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      line-height: 1.3;
+    }
+    .single-post .entry-header .meta {
+      color: #999;
+      font-size: 0.85rem;
+    }
+    @media (max-width: 600px) {
+      .single-post .entry-content { padding: 12px; }
+      .single-post .entry-content h1 { font-size: 1.4rem; }
+      .single-post .entry-content h2 { font-size: 1.1rem; }
+      .single-post .entry-header h1 { font-size: 1.5rem; }
+    }
+    </style>
+<p><script>// Add Beautify button above textareadocument.addEventListener("DOMContentLoaded",function(){var ta=document.querySelector("textarea[name=desc]");if(!ta)return;var btn=document.createElement("button");btn.type="button";btn.className="btn-beautify";btn.innerHTML="✨ Beautify";btn.onclick=function(){var txt=ta.value;if(!txt.trim()){alert("Paste some text first!");return}var lines=txt.split("\n");var result=[];for(var i=0;i<lines.length;i++){var line=lines[i].trim();if(!line){result.push("");continue}if(/^\d+[.)]\s/.test(line)){var idx=line.search(/\d+[.)]\s/);var content=line.substring(line.indexOf(" ")+1);result.push("
+
+
+
+<h3>"+content+"</h3>
+<p>");continue}if(/^[A-Z][A-Z\s]+:/.test(line)&&line.length<50){result.push("
+
+
+
+<h3>"+line+"</h3>
+<p>");continue}line=line.replace(/^([A-Za-z\s]+:)/,"<strong>$1</strong>");result.push("</p>
+<p>"+line+"</p>
+<p>");}ta.value=result.join("\n");};ta.parentNode.insertBefore(btn,ta);});</script></p>
+<p style="margin-bottom:15px;"><a href="/manage-products/?act=add" style="display:inline-block;background:#0d954d;color:#fff;padding:10px 25px;border-radius:6px;text-decoration:none;font-weight:600;">➕ Add New Product</a></p>
+<div style="display:flex;flex-direction:column;gap:10px;">
+<div style="display:flex;align-items:center;gap:10px;background:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,0.05);">
+<div style="flex:1;min-width:0;">
+<div style="font-weight:600;color:#333;font-size:0.9rem;">how to check pc scrap</div>
+<div style="color:#888;font-size:0.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">## How to Identify Plastic Scrap: A Professional Guide Correctly&#8230;</div>
+<div style="color:#bbb;font-size:0.7rem;margin-top:1px;">Jul 15, 2026</div>
+</div>
+<p><a href="https://wa.me/971554779331?text=Hi, I am interested in: how to check pc scrap%0D%0A
+## How to Identify Plastic Scrap: A Professional Guide
+
+Correctly identifying plastic types is essential for quality control. Whether you are dealing with Polypropylene (PP), Polycarbonate (PC), or Polystyrene (PS), these simple, field-tested methods will help you sort your materials accurately.
+
+### 1. The Water Float Test
+
+Plastics have different densities, allowing you to separate them using a simple bucket of tap water.
+
+* **PP (Polypropylene):** A low-density plastic that will **float**.
+* **PS &amp; PC:** Both are denser than water and will **sink**.
+
+### 2. The Flex and Snap Test
+
+Once you have isolated the plastics that sink, use this test to distinguish between PC and PS based on their durability.
+
+* **PC (Polycarbonate):** Known for being incredibly tough and impact-resistant. It will warp, fold, or flex under pressure without breaking.
+* **PS (Polystyrene):** A rigid but brittle material. If struck or bent forcefully, it will **snap or shatter** rather than flex.
+
+### 3. The Acetone Test (Chemical Identification)
+
+Acetone is a highly effective tool for verifying your material. Apply a few drops to a clean sample and observe the reaction for 30 seconds.
+
+| Plastic Type | Reaction to Acetone |
+| --- | --- |
+| **PS (Polystyrene)** | **Dissolves:** Becomes sticky, melts, or liquefies. |
+| **PC (Polycarbonate)** | **Clouds:** The surface loses clarity and turns permanently hazy/white. |
+| **PP (Polypropylene)** | **No Reaction:** The plastic remains completely unchanged. |
+
+&gt; **Safety First:** Always wear safety glasses and gloves when handling chemicals. Perform these tests in a well-ventilated area or outdoors.
+
+### 4. The Burn Test
+
+If you are still unsure, a flame test provides a definitive answer:
+
+* **PC:** Ignites with difficulty; produces yellow-black smoke; gives off a sweet, floral odor.
+* **PP:** Burns easily with a yellow flame; drips like a candle; smells like burning wax or oil.
+* **PS:** Burns with a bright, luminous flame; produces thick, black, sooty smoke; gives off a strong floral/gassy scent.
+
+---
+
+**Need expert help sorting your scrap?**
+To help us provide better guidance, please consider the following:
+
+* **Form:** Is your scrap in shredded flake form or in larger molded parts?
+* **Origin:** Do you know the original products the scrap came from (e.g., electronic casings, water bottles, food containers)?
+
+---
+
+%0D%0ALink: https://alshaabalwaseem.com/how-to-check-pc-scrap/" target="_blank" rel="noopener" title="Inquire via WhatsApp" style="text-decoration:none;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:28px;height:28px;"><path fill="#25D366" d="M12 2C6.48 2 2 5.58 2 10c0 2.53 1.5 4.81 3.82 6.13.25.9-.66 2.6-1.55 3.32-.15.12-.17.34-.04.49.07.08.18.13.29.13.15 0 2.2-.13 3.65-1.15.14-.1.32-.12.48-.05 1.1.48 2.3.74 3.53.74 5.52 0 10-3.58 10-8s-4.48-8-10-8zm-4 9c-.83 0-1.5-.67-1.5-1.5S7.17 8 8 8s1.5.67 1.5 1.5S8.83 11 8 11zm4 0c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11zm4 0c-.83 0-1.5-.67-1.5-1.5S15.17 8 16 8s1.5.67 1.5 1.5S16.83 11 16 11z"/></svg></a></p>
+<div style="position:relative;flex-shrink:0;"><span id="gear_393" onclick="toggleAdmin(393)" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#f0f0f0;border-radius:50%;font-size:16px;user-select:none;">⚙️</span></p>
+<div id="admin_393" style="display:none;position:absolute;top:0;right:100%;margin-right:8px;background:#fff;padding:6px 10px;border-radius:8px;box-shadow:0 2px 15px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;"><span id="pwform_393"><input type="password" id="pwinp_393" placeholder="Password" style="width:80px;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:0.8rem;"><button onclick="checkPw(393)" style="background:#0d954d;color:#fff;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem;margin-left:4px;">Unlock</button></span><span id="actions_393" style="display:none;"><a href="/manage-products/?act=edit&#038;post_id=393" style="background:#f0f0f0;color:#333;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:4px;">✏️ Edit</a><a href="/manage-products/?act=delete&#038;del_id=393" style="background:#fee;color:#c00;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;">🗑️ Delete</a></span></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;background:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,0.05);"><img decoding="async" src="https://alshaabalwaseem.com/wp-content/uploads/2026/07/product_1784031147169-150x150.jpg" style="width:80px;height:80px;object-fit:cover;border-radius:6px;"><img decoding="async" src="https://alshaabalwaseem.com/wp-content/uploads/2026/07/product_1784031151506-150x150.jpg" style="width:80px;height:80px;object-fit:cover;border-radius:6px;"><img decoding="async" src="https://alshaabalwaseem.com/wp-content/uploads/2026/07/product_1784031156630-150x150.jpg" style="width:80px;height:80px;object-fit:cover;border-radius:6px;"></p>
+<div style="flex:1;min-width:0;">
+<div style="font-weight:600;color:#333;font-size:0.9rem;">mix items lot 23</div>
+<div style="color:#888;font-size:0.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">mixed items lot 223</div>
+<div style="color:#bbb;font-size:0.7rem;margin-top:1px;">Jul 14, 2026</div>
+</div>
+<p><a href="https://wa.me/971554779331?text=Hi, I am interested in: mix items lot 23%0D%0A
+
+mixed items lot 223%0D%0ALink: https://alshaabalwaseem.com/mix-items-lot-23-2/" target="_blank" rel="noopener" title="Inquire via WhatsApp" style="text-decoration:none;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:28px;height:28px;"><path fill="#25D366" d="M12 2C6.48 2 2 5.58 2 10c0 2.53 1.5 4.81 3.82 6.13.25.9-.66 2.6-1.55 3.32-.15.12-.17.34-.04.49.07.08.18.13.29.13.15 0 2.2-.13 3.65-1.15.14-.1.32-.12.48-.05 1.1.48 2.3.74 3.53.74 5.52 0 10-3.58 10-8s-4.48-8-10-8zm-4 9c-.83 0-1.5-.67-1.5-1.5S7.17 8 8 8s1.5.67 1.5 1.5S8.83 11 8 11zm4 0c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11zm4 0c-.83 0-1.5-.67-1.5-1.5S15.17 8 16 8s1.5.67 1.5 1.5S16.83 11 16 11z"/></svg></a></p>
+<div style="position:relative;flex-shrink:0;"><span id="gear_386" onclick="toggleAdmin(386)" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#f0f0f0;border-radius:50%;font-size:16px;user-select:none;">⚙️</span></p>
+<div id="admin_386" style="display:none;position:absolute;top:0;right:100%;margin-right:8px;background:#fff;padding:6px 10px;border-radius:8px;box-shadow:0 2px 15px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;"><span id="pwform_386"><input type="password" id="pwinp_386" placeholder="Password" style="width:80px;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:0.8rem;"><button onclick="checkPw(386)" style="background:#0d954d;color:#fff;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem;margin-left:4px;">Unlock</button></span><span id="actions_386" style="display:none;"><a href="/manage-products/?act=edit&#038;post_id=386" style="background:#f0f0f0;color:#333;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:4px;">✏️ Edit</a><a href="/manage-products/?act=delete&#038;del_id=386" style="background:#fee;color:#c00;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;">🗑️ Delete</a></span></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;background:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,0.05);"><img decoding="async" src="https://alshaabalwaseem.com/wp-content/uploads/2026/07/product_1784031147169-150x150.jpg" style="width:80px;height:80px;object-fit:cover;border-radius:6px;"><img decoding="async" src="https://alshaabalwaseem.com/wp-content/uploads/2026/07/product_1784031151506-150x150.jpg" style="width:80px;height:80px;object-fit:cover;border-radius:6px;"><img decoding="async" src="https://alshaabalwaseem.com/wp-content/uploads/2026/07/product_1784031156630-150x150.jpg" style="width:80px;height:80px;object-fit:cover;border-radius:6px;"></p>
+<div style="flex:1;min-width:0;">
+<div style="font-weight:600;color:#333;font-size:0.9rem;">mix items lot 23</div>
+<div style="color:#888;font-size:0.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">mixed items lot 223</div>
+<div style="color:#bbb;font-size:0.7rem;margin-top:1px;">Jul 14, 2026</div>
+</div>
+<p><a href="https://wa.me/971554779331?text=Hi, I am interested in: mix items lot 23%0D%0A
+mixed items lot 223%0D%0ALink: https://alshaabalwaseem.com/mix-items-lot-23/" target="_blank" rel="noopener" title="Inquire via WhatsApp" style="text-decoration:none;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:28px;height:28px;"><path fill="#25D366" d="M12 2C6.48 2 2 5.58 2 10c0 2.53 1.5 4.81 3.82 6.13.25.9-.66 2.6-1.55 3.32-.15.12-.17.34-.04.49.07.08.18.13.29.13.15 0 2.2-.13 3.65-1.15.14-.1.32-.12.48-.05 1.1.48 2.3.74 3.53.74 5.52 0 10-3.58 10-8s-4.48-8-10-8zm-4 9c-.83 0-1.5-.67-1.5-1.5S7.17 8 8 8s1.5.67 1.5 1.5S8.83 11 8 11zm4 0c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11zm4 0c-.83 0-1.5-.67-1.5-1.5S15.17 8 16 8s1.5.67 1.5 1.5S16.83 11 16 11z"/></svg></a></p>
+<div style="position:relative;flex-shrink:0;"><span id="gear_385" onclick="toggleAdmin(385)" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#f0f0f0;border-radius:50%;font-size:16px;user-select:none;">⚙️</span></p>
+<div id="admin_385" style="display:none;position:absolute;top:0;right:100%;margin-right:8px;background:#fff;padding:6px 10px;border-radius:8px;box-shadow:0 2px 15px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;"><span id="pwform_385"><input type="password" id="pwinp_385" placeholder="Password" style="width:80px;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:0.8rem;"><button onclick="checkPw(385)" style="background:#0d954d;color:#fff;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem;margin-left:4px;">Unlock</button></span><span id="actions_385" style="display:none;"><a href="/manage-products/?act=edit&#038;post_id=385" style="background:#f0f0f0;color:#333;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:4px;">✏️ Edit</a><a href="/manage-products/?act=delete&#038;del_id=385" style="background:#fee;color:#c00;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;">🗑️ Delete</a></span></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;background:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,0.05);"><img decoding="async" src="https://alshaabalwaseem.com/wp-content/uploads/2026/07/product_1784030669316-150x150.jpg" style="width:80px;height:80px;object-fit:cover;border-radius:6px;"><img decoding="async" src="https://alshaabalwaseem.com/wp-content/uploads/2026/07/product_1784031110210-150x150.jpg" style="width:80px;height:80px;object-fit:cover;border-radius:6px;"></p>
+<div style="flex:1;min-width:0;">
+<div style="font-weight:600;color:#333;font-size:0.9rem;">pvc lot 004</div>
+<div style="color:#888;font-size:0.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">pvc flflsd tat</div>
+<div style="color:#bbb;font-size:0.7rem;margin-top:1px;">Jul 14, 2026</div>
+</div>
+<p><a href="https://wa.me/971554779331?text=Hi, I am interested in: pvc lot 004%0D%0A
+
+pvc flflsd tat 
+%0D%0ALink: https://alshaabalwaseem.com/pvc-lot-004/" target="_blank" rel="noopener" title="Inquire via WhatsApp" style="text-decoration:none;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:28px;height:28px;"><path fill="#25D366" d="M12 2C6.48 2 2 5.58 2 10c0 2.53 1.5 4.81 3.82 6.13.25.9-.66 2.6-1.55 3.32-.15.12-.17.34-.04.49.07.08.18.13.29.13.15 0 2.2-.13 3.65-1.15.14-.1.32-.12.48-.05 1.1.48 2.3.74 3.53.74 5.52 0 10-3.58 10-8s-4.48-8-10-8zm-4 9c-.83 0-1.5-.67-1.5-1.5S7.17 8 8 8s1.5.67 1.5 1.5S8.83 11 8 11zm4 0c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11zm4 0c-.83 0-1.5-.67-1.5-1.5S15.17 8 16 8s1.5.67 1.5 1.5S16.83 11 16 11z"/></svg></a></p>
+<div style="position:relative;flex-shrink:0;"><span id="gear_378" onclick="toggleAdmin(378)" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#f0f0f0;border-radius:50%;font-size:16px;user-select:none;">⚙️</span></p>
+<div id="admin_378" style="display:none;position:absolute;top:0;right:100%;margin-right:8px;background:#fff;padding:6px 10px;border-radius:8px;box-shadow:0 2px 15px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;"><span id="pwform_378"><input type="password" id="pwinp_378" placeholder="Password" style="width:80px;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:0.8rem;"><button onclick="checkPw(378)" style="background:#0d954d;color:#fff;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem;margin-left:4px;">Unlock</button></span><span id="actions_378" style="display:none;"><a href="/manage-products/?act=edit&#038;post_id=378" style="background:#f0f0f0;color:#333;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:4px;">✏️ Edit</a><a href="/manage-products/?act=delete&#038;del_id=378" style="background:#fee;color:#c00;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;">🗑️ Delete</a></span></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;background:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,0.05);">
+<div style="flex:1;min-width:0;">
+<div style="font-weight:600;color:#333;font-size:0.9rem;">PVC Lot 005</div>
+<div style="color:#888;font-size:0.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Test via new action</div>
+<div style="color:#bbb;font-size:0.7rem;margin-top:1px;">Jul 14, 2026</div>
+</div>
+<p><a href="https://wa.me/971554779331?text=Hi, I am interested in: PVC Lot 005%0D%0ATest via new action%0D%0ALink: https://alshaabalwaseem.com/pvc-lot-005/" target="_blank" rel="noopener" title="Inquire via WhatsApp" style="text-decoration:none;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:28px;height:28px;"><path fill="#25D366" d="M12 2C6.48 2 2 5.58 2 10c0 2.53 1.5 4.81 3.82 6.13.25.9-.66 2.6-1.55 3.32-.15.12-.17.34-.04.49.07.08.18.13.29.13.15 0 2.2-.13 3.65-1.15.14-.1.32-.12.48-.05 1.1.48 2.3.74 3.53.74 5.52 0 10-3.58 10-8s-4.48-8-10-8zm-4 9c-.83 0-1.5-.67-1.5-1.5S7.17 8 8 8s1.5.67 1.5 1.5S8.83 11 8 11zm4 0c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11zm4 0c-.83 0-1.5-.67-1.5-1.5S15.17 8 16 8s1.5.67 1.5 1.5S16.83 11 16 11z"/></svg></a></p>
+<div style="position:relative;flex-shrink:0;"><span id="gear_375" onclick="toggleAdmin(375)" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#f0f0f0;border-radius:50%;font-size:16px;user-select:none;">⚙️</span></p>
+<div id="admin_375" style="display:none;position:absolute;top:0;right:100%;margin-right:8px;background:#fff;padding:6px 10px;border-radius:8px;box-shadow:0 2px 15px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;"><span id="pwform_375"><input type="password" id="pwinp_375" placeholder="Password" style="width:80px;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:0.8rem;"><button onclick="checkPw(375)" style="background:#0d954d;color:#fff;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem;margin-left:4px;">Unlock</button></span><span id="actions_375" style="display:none;"><a href="/manage-products/?act=edit&#038;post_id=375" style="background:#f0f0f0;color:#333;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:4px;">✏️ Edit</a><a href="/manage-products/?act=delete&#038;del_id=375" style="background:#fee;color:#c00;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;">🗑️ Delete</a></span></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;background:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,0.05);">
+<div style="flex:1;min-width:0;">
+<div style="font-weight:600;color:#333;font-size:0.9rem;">Test Product from API</div>
+<div style="color:#888;font-size:0.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Test description</div>
+<div style="color:#bbb;font-size:0.7rem;margin-top:1px;">Jul 14, 2026</div>
+</div>
+<p><a href="https://wa.me/971554779331?text=Hi, I am interested in: Test Product from API%0D%0ATest description%0D%0ALink: https://alshaabalwaseem.com/test-product-from-api/" target="_blank" rel="noopener" title="Inquire via WhatsApp" style="text-decoration:none;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:28px;height:28px;"><path fill="#25D366" d="M12 2C6.48 2 2 5.58 2 10c0 2.53 1.5 4.81 3.82 6.13.25.9-.66 2.6-1.55 3.32-.15.12-.17.34-.04.49.07.08.18.13.29.13.15 0 2.2-.13 3.65-1.15.14-.1.32-.12.48-.05 1.1.48 2.3.74 3.53.74 5.52 0 10-3.58 10-8s-4.48-8-10-8zm-4 9c-.83 0-1.5-.67-1.5-1.5S7.17 8 8 8s1.5.67 1.5 1.5S8.83 11 8 11zm4 0c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11zm4 0c-.83 0-1.5-.67-1.5-1.5S15.17 8 16 8s1.5.67 1.5 1.5S16.83 11 16 11z"/></svg></a></p>
+<div style="position:relative;flex-shrink:0;"><span id="gear_372" onclick="toggleAdmin(372)" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#f0f0f0;border-radius:50%;font-size:16px;user-select:none;">⚙️</span></p>
+<div id="admin_372" style="display:none;position:absolute;top:0;right:100%;margin-right:8px;background:#fff;padding:6px 10px;border-radius:8px;box-shadow:0 2px 15px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;"><span id="pwform_372"><input type="password" id="pwinp_372" placeholder="Password" style="width:80px;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:0.8rem;"><button onclick="checkPw(372)" style="background:#0d954d;color:#fff;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem;margin-left:4px;">Unlock</button></span><span id="actions_372" style="display:none;"><a href="/manage-products/?act=edit&#038;post_id=372" style="background:#f0f0f0;color:#333;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:4px;">✏️ Edit</a><a href="/manage-products/?act=delete&#038;del_id=372" style="background:#fee;color:#c00;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;">🗑️ Delete</a></span></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;background:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,0.05);">
+<div style="flex:1;min-width:0;">
+<div style="font-weight:600;color:#333;font-size:0.9rem;">pvc pipe lot 200 tons</div>
+<div style="color:#888;font-size:0.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">pvc pipe lot cutted</div>
+<div style="color:#bbb;font-size:0.7rem;margin-top:1px;">Jul 14, 2026</div>
+</div>
+<p><a href="https://wa.me/971554779331?text=Hi, I am interested in: pvc pipe lot 200 tons%0D%0Apvc pipe lot cutted %0D%0ALink: https://alshaabalwaseem.com/pvc-pipe-lot-200-tons/" target="_blank" rel="noopener" title="Inquire via WhatsApp" style="text-decoration:none;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:28px;height:28px;"><path fill="#25D366" d="M12 2C6.48 2 2 5.58 2 10c0 2.53 1.5 4.81 3.82 6.13.25.9-.66 2.6-1.55 3.32-.15.12-.17.34-.04.49.07.08.18.13.29.13.15 0 2.2-.13 3.65-1.15.14-.1.32-.12.48-.05 1.1.48 2.3.74 3.53.74 5.52 0 10-3.58 10-8s-4.48-8-10-8zm-4 9c-.83 0-1.5-.67-1.5-1.5S7.17 8 8 8s1.5.67 1.5 1.5S8.83 11 8 11zm4 0c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11zm4 0c-.83 0-1.5-.67-1.5-1.5S15.17 8 16 8s1.5.67 1.5 1.5S16.83 11 16 11z"/></svg></a></p>
+<div style="position:relative;flex-shrink:0;"><span id="gear_367" onclick="toggleAdmin(367)" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#f0f0f0;border-radius:50%;font-size:16px;user-select:none;">⚙️</span></p>
+<div id="admin_367" style="display:none;position:absolute;top:0;right:100%;margin-right:8px;background:#fff;padding:6px 10px;border-radius:8px;box-shadow:0 2px 15px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;"><span id="pwform_367"><input type="password" id="pwinp_367" placeholder="Password" style="width:80px;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:0.8rem;"><button onclick="checkPw(367)" style="background:#0d954d;color:#fff;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem;margin-left:4px;">Unlock</button></span><span id="actions_367" style="display:none;"><a href="/manage-products/?act=edit&#038;post_id=367" style="background:#f0f0f0;color:#333;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:4px;">✏️ Edit</a><a href="/manage-products/?act=delete&#038;del_id=367" style="background:#fee;color:#c00;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;">🗑️ Delete</a></span></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;background:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,0.05);">
+<div style="flex:1;min-width:0;">
+<div style="font-weight:600;color:#333;font-size:0.9rem;">HDPE100 Regrind – Premium Quality Available for Export</div>
+<div style="color:#888;font-size:0.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Material: HDPE100 Regrind Quantity: 500 MT Origin: UAE Price: Contact&#8230;</div>
+<div style="color:#bbb;font-size:0.7rem;margin-top:1px;">Jul 13, 2026</div>
+</div>
+<p><a href="https://wa.me/971554779331?text=Hi, I am interested in: HDPE100 Regrind – Premium Quality Available for Export%0D%0A
+
+Material: HDPE100 Regrind
+Quantity: 500 MT
+Origin: UAE
+Price: Contact for best price
+
+
+We have high-quality HDPE100 regrind available for immediate export. Suitable for pipe extrusion, injection molding, and blow molding applications. 99.9% pure, hot-washed, moisture < 0.5%. Contact us for samples and pricing.
+
+
+
+Contact via WhatsApp
+
+
+%0D%0ALink: https://alshaabalwaseem.com/hdpe100-regrind-premium-quality-available-for-export/" target="_blank" rel="noopener" title="Inquire via WhatsApp" style="text-decoration:none;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:28px;height:28px;"><path fill="#25D366" d="M12 2C6.48 2 2 5.58 2 10c0 2.53 1.5 4.81 3.82 6.13.25.9-.66 2.6-1.55 3.32-.15.12-.17.34-.04.49.07.08.18.13.29.13.15 0 2.2-.13 3.65-1.15.14-.1.32-.12.48-.05 1.1.48 2.3.74 3.53.74 5.52 0 10-3.58 10-8s-4.48-8-10-8zm-4 9c-.83 0-1.5-.67-1.5-1.5S7.17 8 8 8s1.5.67 1.5 1.5S8.83 11 8 11zm4 0c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11zm4 0c-.83 0-1.5-.67-1.5-1.5S15.17 8 16 8s1.5.67 1.5 1.5S16.83 11 16 11z"/></svg></a></p>
+<div style="position:relative;flex-shrink:0;"><span id="gear_358" onclick="toggleAdmin(358)" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#f0f0f0;border-radius:50%;font-size:16px;user-select:none;">⚙️</span></p>
+<div id="admin_358" style="display:none;position:absolute;top:0;right:100%;margin-right:8px;background:#fff;padding:6px 10px;border-radius:8px;box-shadow:0 2px 15px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;"><span id="pwform_358"><input type="password" id="pwinp_358" placeholder="Password" style="width:80px;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:0.8rem;"><button onclick="checkPw(358)" style="background:#0d954d;color:#fff;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem;margin-left:4px;">Unlock</button></span><span id="actions_358" style="display:none;"><a href="/manage-products/?act=edit&#038;post_id=358" style="background:#f0f0f0;color:#333;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:4px;">✏️ Edit</a><a href="/manage-products/?act=delete&#038;del_id=358" style="background:#fee;color:#c00;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;">🗑️ Delete</a></span></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;background:#fff;padding:10px 15px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,0.05);">
+<div style="flex:1;min-width:0;">
+<div style="font-weight:600;color:#333;font-size:0.9rem;">Hello world!</div>
+<div style="color:#888;font-size:0.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Welcome to WordPress. This is your first post. Edit or&#8230;</div>
+<div style="color:#bbb;font-size:0.7rem;margin-top:1px;">May 13, 2026</div>
+</div>
+<p><a href="https://wa.me/971554779331?text=Hi, I am interested in: Hello world!%0D%0A
+Welcome to WordPress. This is your first post. Edit or delete it, then start writing!
+%0D%0ALink: https://alshaabalwaseem.com/hello-world/" target="_blank" rel="noopener" title="Inquire via WhatsApp" style="text-decoration:none;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:28px;height:28px;"><path fill="#25D366" d="M12 2C6.48 2 2 5.58 2 10c0 2.53 1.5 4.81 3.82 6.13.25.9-.66 2.6-1.55 3.32-.15.12-.17.34-.04.49.07.08.18.13.29.13.15 0 2.2-.13 3.65-1.15.14-.1.32-.12.48-.05 1.1.48 2.3.74 3.53.74 5.52 0 10-3.58 10-8s-4.48-8-10-8zm-4 9c-.83 0-1.5-.67-1.5-1.5S7.17 8 8 8s1.5.67 1.5 1.5S8.83 11 8 11zm4 0c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11zm4 0c-.83 0-1.5-.67-1.5-1.5S15.17 8 16 8s1.5.67 1.5 1.5S16.83 11 16 11z"/></svg></a></p>
+<div style="position:relative;flex-shrink:0;"><span id="gear_1" onclick="toggleAdmin(1)" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#f0f0f0;border-radius:50%;font-size:16px;user-select:none;">⚙️</span></p>
+<div id="admin_1" style="display:none;position:absolute;top:0;right:100%;margin-right:8px;background:#fff;padding:6px 10px;border-radius:8px;box-shadow:0 2px 15px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;"><span id="pwform_1"><input type="password" id="pwinp_1" placeholder="Password" style="width:80px;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:0.8rem;"><button onclick="checkPw(1)" style="background:#0d954d;color:#fff;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem;margin-left:4px;">Unlock</button></span><span id="actions_1" style="display:none;"><a href="/manage-products/?act=edit&#038;post_id=1" style="background:#f0f0f0;color:#333;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:4px;">✏️ Edit</a><a href="/manage-products/?act=delete&#038;del_id=1" style="background:#fee;color:#c00;padding:5px 10px;border-radius:4px;text-decoration:none;font-size:0.85rem;">🗑️ Delete</a></span></div>
+</div>
+</div>
+</div>
+<p><script>
+function toggleAdmin(id) {
+    var box = document.getElementById("admin_" + id);
+    box.style.display = box.style.display === "none" ? "block" : "none";
+    document.getElementById("pwinp_" + id).value = "";
+    document.getElementById("pwform_" + id).style.display = "";
+    document.getElementById("actions_" + id).style.display = "none";
+}
+function checkPw(id) {
+    var pw = document.getElementById("pwinp_" + id).value;
+    if (pw === "abcd") {
+        document.getElementById("pwform_" + id).style.display = "none";
+        document.getElementById("actions_" + id).style.display = "";
+    } else {
+        alert("Wrong password!");
+    }
+}
+</script></p>

@@ -1,53 +1,7 @@
 /**
  * Product Manager with Image Upload
- * Supports: crop, compress to ≤100KB, camera capture, max 3 images
+ * Supports: crop, compress to <=100KB, camera capture, max 3 images
  */
-
-// === FACEBOOK CREDENTIALS ===
-defined('FB_PAGE_ID') or define('FB_PAGE_ID', '1273833299139182');
-defined('FB_PAGE_TOKEN') or define('FB_PAGE_TOKEN', 'EAAV6XuCbNa0BRzINGqkqGpYn2RAu0LRRIWC0oXwVGgHZBMg71JVi9ILErFVx87H9d2CJf2eeaDsvBrhDHYsMOfmxF96wMd4BW8cqT4p2uvxeutmyoDkWopAO7v7xLClEJZCWXSZCdL4WNOxZCjDMkZCx5jDNs7qypzrl4Do1xzE3xyUs6iGYMLn36OlIkPfrDck4QUyieu0xDVo8YAFY6HfGjeJwvfXIaUpxxCQD8JFy3YQB3pY4za6grLEGZB');
-
-// === FACEBOOK AUTO-POST ===
-function post_to_facebook($pid) {
-    $token = defined('FB_PAGE_TOKEN') ? FB_PAGE_TOKEN : '';
-    $page_id = defined('FB_PAGE_ID') ? FB_PAGE_ID : '';
-    if (!$token || !$page_id) return false;
-    
-    $title = get_the_title($pid);
-    $desc = wp_trim_words(strip_tags(get_post_field('post_content', $pid)), 50, '...');
-    $permalink = get_permalink($pid);
-    $img = get_the_post_thumbnail_url($pid, 'full');
-    if (!$img) {
-        $imgs = get_post_meta($pid, '_product_images', true);
-        if (!empty($imgs)) $img = wp_get_attachment_url($imgs[0]);
-    }
-    
-    $p_type = get_post_meta($pid, '_product_type', true);
-    $p_qty = get_post_meta($pid, '_product_qty', true);
-    $p_country = get_post_meta($pid, '_product_country', true);
-    
-    $msg = $title;
-    if ($p_type || $p_qty || $p_country) {
-        $msg .= "\n";
-        if ($p_type === 'buy') $msg .= '🟢 Looking to Buy';
-        elseif ($p_type === 'sell') $msg .= '🔴 Available for Sell';
-        if ($p_qty) $msg .= ' | 📦 ' . $p_qty;
-        if ($p_country) $msg .= ' | 🌍 ' . $p_country;
-    }
-    $msg .= "\n\n" . $desc . "\n\n🔗 " . $permalink;
-    
-    $fb_data = array('message' => $msg, 'access_token' => $token);
-    if ($img) $fb_data['link'] = $permalink;
-    
-    $res = wp_remote_post('https://graph.facebook.com/v22.0/' . $page_id . '/feed', array(
-        'body' => $fb_data,
-        'timeout' => 15
-    ));
-    
-    if (is_wp_error($res)) return false;
-    $result = json_decode(wp_remote_retrieve_body($res), true);
-    return isset($result['id']) ? true : false;
-}
 
 // === DISPLAY INQUIRY META ON SINGLE POST ===
 add_filter('the_content', function($content) {
@@ -62,13 +16,13 @@ add_filter('the_content', function($content) {
     
     $html = '<div style="background:#f8fff8;border:1px solid #d4edda;border-radius:8px;padding:15px 20px;margin-bottom:15px;display:flex;flex-wrap:wrap;gap:12px;font-size:0.9rem;">';
     if ($p_type) {
-        $badge = $p_type === 'buy' ? '🟢 Buy' : '🔴 Sell';
+        $badge = $p_type === 'buy' ? ' Buy' : ' Sell';
         $html .= '<div style="background:' . ($p_type === 'buy' ? '#e8f5e9' : '#ffebee') . ';padding:5px 14px;border-radius:20px;font-weight:700;font-size:0.85rem;color:' . ($p_type === 'buy' ? '#2e7d32' : '#c62828') . ';">' . $badge . '</div>';
     }
-    if ($p_qty) $html .= '<div>📦 <strong>Quantity:</strong> ' . esc_html($p_qty) . '</div>';
-    if ($p_country) $html .= '<div>🌍 <strong>Destination:</strong> ' . esc_html($p_country) . '</div>';
-    if ($p_port) $html .= '<div>🚢 <strong>Port:</strong> ' . esc_html($p_port) . '</div>';
-    if ($p_terms) $html .= '<div style="width:100%;padding-top:6px;border-top:1px dashed #d4edda;color:#555;">📋 <strong>Terms:</strong> ' . esc_html($p_terms) . '</div>';
+    if ($p_qty) $html .= '<div><strong>Quantity:</strong> ' . esc_html($p_qty) . '</div>';
+    if ($p_country) $html .= '<div><strong>Destination:</strong> ' . esc_html($p_country) . '</div>';
+    if ($p_port) $html .= '<div><strong>Port:</strong> ' . esc_html($p_port) . '</div>';
+    if ($p_terms) $html .= '<div style="width:100%;padding-top:6px;border-top:1px dashed #d4edda;color:#555;"><strong>Terms:</strong> ' . esc_html($p_terms) . '</div>';
     $html .= '</div>';
     
     return $html . $content;
@@ -165,10 +119,10 @@ add_shortcode('product_admin', function() {
             update_post_meta($pid, '_product_country', sanitize_text_field($_POST['product_country']));
             update_post_meta($pid, '_product_port', sanitize_text_field($_POST['product_port']));
             update_post_meta($pid, '_product_terms', sanitize_textarea_field($_POST['product_terms']));
-            $output .= '<div style="background:#d4edda;color:#155724;padding:12px;border-radius:6px;margin-bottom:15px;">✅ Published! <a href="' . get_permalink($pid) . '" style="color:#155724;font-weight:600;">' . esc_html(get_the_title($pid)) . '</a></div>';
+            $output .= '<div style="background:#d4edda;color:#155724;padding:12px;border-radius:6px;margin-bottom:15px;">Published! <a href="' . get_permalink($pid) . '" style="color:#155724;font-weight:600;">' . esc_html(get_the_title($pid)) . '</a></div>';
         } else {
             $err = is_wp_error($pid) ? $pid->get_error_message() : 'Unknown error';
-            $output .= '<div style="background:#f8d7da;color:#721c24;padding:12px;border-radius:6px;margin-bottom:15px;">❌ Failed: ' . $err . '</div>';
+            $output .= '<div style="background:#f8d7da;color:#721c24;padding:12px;border-radius:6px;margin-bottom:15px;">Failed: Failed: ' . $err . '</div>';
         }
     }
     
@@ -198,35 +152,13 @@ add_shortcode('product_admin', function() {
         update_post_meta(intval($_POST['edit_id']), '_product_country', sanitize_text_field($_POST['product_country']));
         update_post_meta(intval($_POST['edit_id']), '_product_port', sanitize_text_field($_POST['product_port']));
         update_post_meta(intval($_POST['edit_id']), '_product_terms', sanitize_textarea_field($_POST['product_terms']));
-        $output .= '<div style="background:#d4edda;color:#155724;padding:12px;border-radius:6px;margin-bottom:15px;">✅ Updated!</div>';
-    }
-    
-    // --- FACEBOOK PUSH ---
-    if ($action === 'push_fb' && isset($_GET['post_id'])) {
-        $pid = intval($_GET['post_id']);
-        if (!$auth_ok) {
-            $output .= '<div style="max-width:400px;margin:20px 0;padding:25px;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.08);"><h3>📘 Post to Facebook</h3>
-            <p style="color:#666;font-size:0.9rem;margin-bottom:12px;">Enter password to post this product to Facebook Page.</p>
-            <form method="post" style="display:flex;gap:10px;flex-wrap:wrap;">
-            <input type="hidden" name="act" value="push_fb">
-            <input type="hidden" name="post_id" value="' . $pid . '">
-            <input type="password" name="admin_pw" placeholder="Password" style="flex:1;padding:10px;border:2px solid #e0e0e0;border-radius:6px;">
-            <input type="submit" value="📘 Post Now" style="background:#1877F2;color:#fff;padding:10px 20px;border:none;border-radius:6px;cursor:pointer;">
-            </form></div>';
-        } else {
-            $result = post_to_facebook($pid);
-            if ($result) {
-                $output .= '<div style="background:#d4edda;color:#155724;padding:12px;border-radius:6px;margin-bottom:15px;">✅ Posted to Facebook! <a href="https://www.facebook.com/profile.php?id=' . FB_PAGE_ID . '" target="_blank" style="color:#155724;font-weight:600;">View Post</a></div>';
-            } else {
-                $output .= '<div style="background:#f8d7da;color:#721c24;padding:12px;border-radius:6px;margin-bottom:15px;">❌ Facebook post failed. Check token.</div>';
-            }
-        }
+        $output .= '<div style="background:#d4edda;color:#155724;padding:12px;border-radius:6px;margin-bottom:15px;">Updated!</div>';
     }
     
     // --- DELETE ---
     if ($action === 'delete' && isset($_GET['del_id'])) {
         if (!$auth_ok) {
-            $output .= '<div style="max-width:400px;margin:20px 0;padding:25px;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.08);"><h3>🔒 Password</h3>
+            $output .= '<div style="max-width:400px;margin:20px 0;padding:25px;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.08);"><h3>Password</h3>
             <form method="post" style="display:flex;gap:10px;flex-wrap:wrap;">
             <input type="hidden" name="act" value="delete">
             <input type="hidden" name="del_id" value="' . intval($_GET['del_id']) . '">
@@ -235,7 +167,7 @@ add_shortcode('product_admin', function() {
             </form></div>';
         } else {
             wp_delete_post(intval($_GET['del_id']), true);
-            $output .= '<div style="background:#f8d7da;color:#721c24;padding:12px;border-radius:6px;margin-bottom:15px;">🗑️ Deleted.</div>';
+            $output .= '<div style="background:#f8d7da;color:#721c24;padding:12px;border-radius:6px;margin-bottom:15px;">Delete Deleted.</div>';
         }
     }
     
@@ -269,7 +201,7 @@ add_shortcode('product_admin', function() {
     
     // Password form
     if ($show_form && $mode === 'pw') {
-        $output .= '<div style="max-width:400px;margin:20px 0;padding:25px;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.08);"><h3>🔒 Password Required</h3>';
+        $output .= '<div style="max-width:400px;margin:20px 0;padding:25px;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.08);"><h3>Password Required</h3>';
         $output .= '<form method="post" style="display:flex;gap:10px;flex-wrap:wrap;">';
         $output .= '<input type="hidden" name="act" value="' . htmlspecialchars($action) . '">';
         if (isset($_GET['post_id'])) $output .= '<input type="hidden" name="post_id" value="' . intval($_GET['post_id']) . '">';
@@ -284,7 +216,7 @@ add_shortcode('product_admin', function() {
         $img_ids_str = implode(',', $edit_imgs);
         
         $output .= '<div style="background:#fff;padding:25px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.08);margin-bottom:20px;">';
-        $output .= '<h3 style="margin-top:0;">' . ($mode === 'edit' ? '✏️ Edit Product' : '➕ Add New Product') . '</h3>';
+        $output .= '<h3 style="margin-top:0;">' . ($mode === 'edit' ? 'Edit Edit Product' : 'Add New Product') . '</h3>';
         
         $output .= '<form id="pf" method="post" action="/manage-products/" style="display:flex;flex-direction:column;gap:12px;" enctype="multipart/form-data">';
         $output .= '<input type="hidden" name="act" value="' . ($mode === 'edit' ? 'edit' : 'create') . '">';
@@ -305,22 +237,22 @@ add_shortcode('product_admin', function() {
             }
         }
         $output .= '</div>';
-        $output .= '<label for="imgInput" style="display:inline-block;background:#0d954d;color:#fff;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:600;">📷 Add Images (max 3)</label>';
+        $output .= '<label for="imgInput" style="display:inline-block;background:#0d954d;color:#fff;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:600;">Add Images (max 3)</label>';
         $output .= '<input type="file" id="imgInput" accept="image/*" style="display:none;" multiple>';
         $output .= '<div style="margin-top:4px;">';
-        $output .= '<label for="camInput" style="color:#888;font-size:0.8rem;cursor:pointer;text-decoration:underline;">📸 Use Camera instead</label>';
+        $output .= '<label for="camInput" style="color:#888;font-size:0.8rem;cursor:pointer;text-decoration:underline;">Use Camera instead</label>';
         $output .= '<input type="file" id="camInput" accept="image/*" capture="environment" style="display:none;">';
         $output .= '</div>';
-        $output .= '<p style="color:#888;font-size:0.85rem;margin:8px 0 0;">Images auto-compressed to ≤100KB. Max 3 images.</p>';
+        $output .= '<p style="color:#888;font-size:0.85rem;margin:8px 0 0;">Images auto-compressed to <=100KB. Max 3 images.</p>';
         $output .= '</div>';
         
         // Crop modal
         $output .= '<div id="crModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:999999;align-items:center;justify-content:center;">';
         $output .= '<div style="background:#fff;border-radius:12px;padding:20px;max-width:600px;width:90%;max-height:90vh;overflow:auto;text-align:center;">';
-        $output .= '<h3 style="margin-top:0;">✂️ Review Image</h3>';
+        $output .= '<h3 style="margin-top:0;"> Review Image</h3>';
         $output .= '<img id="crImg" style="max-width:100%;max-height:350px;">';
         $output .= '<div style="display:flex;gap:10px;justify-content:center;margin-top:15px;">';
-        $output .= '<button type="button" onclick="confirmCrop()" style="background:#0d954d;color:#fff;padding:10px 25px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">✅ Confirm &amp; Compress</button>';
+        $output .= '<button type="button" onclick="confirmCrop()" style="background:#0d954d;color:#fff;padding:10px 25px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">Confirm &amp; Compress</button>';
         $output .= '<button type="button" onclick="closeCrop()" style="background:#888;color:#fff;padding:10px 25px;border:none;border-radius:6px;cursor:pointer;">Skip</button>';
         $output .= '</div></div></div>';
         
@@ -333,24 +265,24 @@ add_shortcode('product_admin', function() {
         $sel_buy = $edit_type === 'buy' ? 'selected' : '';
         $sel_sell = $edit_type === 'sell' ? 'selected' : '';
         $output .= '<select name="product_type" style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:0.9rem;color:#333;">';
-        $output .= '<option value="">📌 Buy / Sell?</option>';
-        $output .= '<option value="buy" ' . $sel_buy . '>🟢 I want to Buy</option>';
-        $output .= '<option value="sell" ' . $sel_sell . '>🔴 I want to Sell</option>';
+        $output .= '<option value="">Buy / Sell?</option>';
+        $output .= '<option value="buy" ' . $sel_buy . '> I want to Buy</option>';
+        $output .= '<option value="sell" ' . $sel_sell . '> I want to Sell</option>';
         $output .= '</select>';
         // Quantity
-        $output .= '<input type="text" name="product_qty" placeholder="📦 Material Quantity (e.g. 500 MT)" value="' . esc_attr($edit_qty) . '" style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:0.9rem;">';
+        $output .= '<input type="text" name="product_qty" placeholder="Material Quantity (e.g. 500 MT)" value="' . esc_attr($edit_qty) . '" style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:0.9rem;">';
         // Country
-        $output .= '<input type="text" name="product_country" placeholder="🌍 Destination Country / CNF" value="' . esc_attr($edit_country) . '" style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:0.9rem;">';
+        $output .= '<input type="text" name="product_country" placeholder="Destination Country / CNF" value="' . esc_attr($edit_country) . '" style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:0.9rem;">';
         // Port
-        $output .= '<input type="text" name="product_port" placeholder="🚢 Port of Loading" value="' . esc_attr($edit_port) . '" style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:0.9rem;">';
+        $output .= '<input type="text" name="product_port" placeholder="Port of Loading" value="' . esc_attr($edit_port) . '" style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:0.9rem;">';
         $output .= '</div>';
         // Terms
-        $output .= '<textarea name="product_terms" rows="2" placeholder="📋 Other Terms (payment, inspection, packaging...)" style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:0.9rem;">' . esc_textarea($edit_terms) . '</textarea>';
+        $output .= '<textarea name="product_terms" rows="2" placeholder="Other Terms (payment, inspection, packaging...)" style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:0.9rem;">' . esc_textarea($edit_terms) . '</textarea>';
         
         // Description
         $output .= '<textarea name="desc" rows="5" placeholder="Full description, material specs, price..." required style="padding:12px;border:2px solid #e0e0e0;border-radius:6px;font-size:1rem;">' . esc_textarea($edit_content) . '</textarea>';
         $output .= '<div style="display:flex;gap:10px;">';
-        $output .= '<input type="submit" value="' . ($mode === 'edit' ? '💾 Save' : '📦 Publish') . '" style="background:#0d954d;color:#fff;padding:12px 25px;border:none;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;">';
+        $output .= '<input type="submit" value="' . ($mode === 'edit' ? 'Save Save' : 'Publish') . '" style="background:#0d954d;color:#fff;padding:12px 25px;border:none;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;">';
         $output .= '<a href="/manage-products/" style="padding:12px 20px;color:#666;text-decoration:none;">Cancel</a>';
         $output .= '</div>';
         $output .= '</form></div>';
@@ -447,7 +379,7 @@ function updImgIds() {
         .pm-wrap { position:relative !important; }
     }
     </style>';
-    $output .= '<p style="margin-bottom:15px;"><a href="/manage-products/?act=add" style="display:inline-block;background:#0d954d;color:#fff;padding:10px 25px;border-radius:6px;text-decoration:none;font-weight:600;">➕ Add New Product</a></p>';
+    $output .= '<p style="margin-bottom:15px;"><a href="/manage-products/?act=add" style="display:inline-block;background:#0d954d;color:#fff;padding:10px 25px;border-radius:6px;text-decoration:none;font-weight:600;">Add New Product</a></p>';
     
     $posts = get_posts(array('post_type' => 'post', 'posts_per_page' => 50, 'post_status' => 'publish'));
     if (empty($posts)) {
@@ -500,9 +432,9 @@ function updImgIds() {
             $output .= '<div class="title" style="font-weight:600;color:#333;font-size:0.85rem;">' . $type_badge . $title . '</div>';
             // Show meta info line
             $meta_parts = array();
-            if ($p_qty) $meta_parts[] = '📦 ' . $p_qty;
-            if ($p_country) $meta_parts[] = '🌍 ' . $p_country;
-            if ($p_port) $meta_parts[] = '🚢 ' . $p_port;
+            if ($p_qty) $meta_parts[] = '' . $p_qty;
+            if ($p_country) $meta_parts[] = '' . $p_country;
+            if ($p_port) $meta_parts[] = '' . $p_port;
             if (!empty($meta_parts)) {
                 $output .= '<div style="color:#666;font-size:0.7rem;margin-top:2px;">' . implode(' | ', $meta_parts) . '</div>';
             }
@@ -524,15 +456,15 @@ function updImgIds() {
             
             // Gear icon
             $output .= '<div style="position:relative;">';
-            $output .= '<span id="gear_' . $pid . '" onclick="event.stopPropagation();toggleAdmin(' . $pid . ')" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#f0f0f0;border-radius:50%;font-size:14px;user-select:none;">⚙️</span>';
+            $output .= '<span id="gear_' . $pid . '" onclick="event.stopPropagation();toggleAdmin(' . $pid . ')" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#f0f0f0;border-radius:50%;font-size:14px;user-select:none;"></span>';
             $output .= '<div id="admin_' . $pid . '" style="display:none;position:absolute;top:0;right:100%;margin-right:5px;background:#fff;padding:5px 8px;border-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,0.15);white-space:nowrap;z-index:999;">';
             $output .= '<span id="pwform_' . $pid . '">';
             $output .= '<input type="password" id="pwinp_' . $pid . '" placeholder="Password" style="width:70px;padding:4px 6px;border:1px solid #ddd;border-radius:4px;font-size:0.75rem;">';
             $output .= '<button onclick="checkPw(' . $pid . ')" style="background:#0d954d;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.75rem;margin-left:3px;">Unlock</button>';
             $output .= '</span>';
             $output .= '<span id="actions_' . $pid . '" style="display:none;">';
-            $output .= '<a href="/manage-products/?act=edit&post_id=' . $pid . '" style="background:#f0f0f0;color:#333;padding:4px 8px;border-radius:4px;text-decoration:none;font-size:0.8rem;margin-right:3px;">✏️ Edit</a>';
-            $output .= '<a href="/manage-products/?act=delete&del_id=' . $pid . '" style="background:#fee;color:#c00;padding:4px 8px;border-radius:4px;text-decoration:none;font-size:0.8rem;">🗑️ Delete</a>';
+            $output .= '<a href="/manage-products/?act=edit&post_id=' . $pid . '" style="background:#f0f0f0;color:#333;padding:4px 8px;border-radius:4px;text-decoration:none;font-size:0.8rem;margin-right:3px;">Edit Edit</a>';
+            $output .= '<a href="/manage-products/?act=delete&del_id=' . $pid . '" style="background:#fee;color:#c00;padding:4px 8px;border-radius:4px;text-decoration:none;font-size:0.8rem;">Delete Delete</a>';
             $output .= '</span></div></div></div></div>';
         }
         $output .= '</div>';
